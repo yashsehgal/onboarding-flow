@@ -4,6 +4,7 @@ import ReactModal from "react-modal";
 ReactModal.setAppElement('#root');
 
 export default function Onboarding() {
+
     const [onboardingRef, setOnboarding] = useState(false);
     const [currentOnboardingViewRef, setCurrentOnboardingView] = useState(0);
     const [contentForOnboardingRef, setContentForOnboarding] = useState(manageOnboardingContent_onSlide());
@@ -25,14 +26,8 @@ export default function Onboarding() {
         
         // next button text content will be getting changed
         // once the user is on the ending slide (lastIndex slide)
-        currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount ? setNextButtonContent("get started") : setNextButtonContent("next");
+        currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount ? setNextButtonContent("get started 🚀") : setNextButtonContent("next");
     }, [currentOnboardingViewRef]);
-
-    useEffect(() => {
-        if (contentForOnboardingRef.totalSlideCount === -1) {
-            setOnboarding(false);
-        }
-    }, []);
 
     return (
         <React.Fragment>
@@ -43,7 +38,7 @@ export default function Onboarding() {
                 Start Onboarding
             </button>
             <ReactModal 
-                isOpen={onboardingRef} 
+                isOpen={onboardingRef && contentForOnboardingRef.totalSlideCount !== -1 ? true : false} 
                 onRequestClose={() => setOnboarding(false)}
                 style={{
                     overlay: {
@@ -73,7 +68,10 @@ export default function Onboarding() {
                         height: 'fit-content'
                     }}
                 >
-                    {contentForOnboardingRef.content}
+                    <span className="new-feature-tag-slot w-fit h-fit">
+                        {contentForOnboardingRef.content.newFeatureTag ? <p className="w-fit h-fit text-xs font-bold text-purple-500">NEW FEATURE</p> : <React.Fragment></React.Fragment>}
+                    </span>
+                    <h1 className="leading-snug text-2xl font-medium text-white mt-2">{contentForOnboardingRef.content.featureTitle}</h1>
                 </div>
                 <div className="button-slots-wrapper mt-4 flex flex-row items-center justify-between">
                     <div className="left-button-slot w-fit h-fit flex flex-row items-center justify-center">
@@ -117,7 +115,14 @@ export default function Onboarding() {
 
 function manageOnboardingContent_onSlide(currentState=0) {
     let onboardingContent = [
+        {
+            newFeatureTag: true,
+            featureTitle: "Visualiser",
+            featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
+            featureScreenshots: [
 
+            ]
+        }    
     ];
 
     return { content: onboardingContent[currentState], totalSlideCount: onboardingContent.length - 1};
