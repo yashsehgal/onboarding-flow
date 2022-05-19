@@ -7,9 +7,25 @@ export default function Onboarding() {
     const [onboardingRef, setOnboarding] = useState(false);
     const [currentOnboardingViewRef, setCurrentOnboardingView] = useState(0);
     const [contentForOnboardingRef, setContentForOnboarding] = useState(manageOnboardingContent_onSlide());
+
+    // button visibilty states
+    const [previousButtonVisibilityRef, setPreviousButtonVisibility] = useState("none");
+    const [nextButtonContentRef, setNextButtonContent] = useState("next");
+
     useEffect(() => {
         // fetching content to show in the modal
         setContentForOnboarding(manageOnboardingContent_onSlide(currentOnboardingViewRef));
+        
+        // managing visibility states for buttons
+        
+        // previous button will be set as none(in terms of display) 
+        // when currentOnboardingViewRef === 0 (initial screen view)
+        currentOnboardingViewRef !== 0 ? setPreviousButtonVisibility("block") : setPreviousButtonVisibility("none");
+        
+        // next button text content will be getting changed
+        // once the user is on the ending slide (lastIndex slide)
+        currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount ? setNextButtonContent("get started") : setNextButtonContent("next");
+
     }, [currentOnboardingViewRef]);
     return (
         <React.Fragment>
@@ -64,19 +80,25 @@ export default function Onboarding() {
                     <div className="right-button-slot-wrapper">
                         <div className="right-button-slot w-fit h-fit flex flex-row items-center justify-center">
                             <button
-                                className={" text-white font-medium px-3 py-1.5 rounded-sm bg-white bg-opacity-40 uppercase"} 
-                                onClick={() => setCurrentOnboardingView(currentOnboardingViewRef - 1)}
+                                className="text-white font-medium px-3 py-1.5 rounded-sm bg-white bg-opacity-40 uppercase" 
+                                onClick={() => {
+                                    setCurrentOnboardingView(currentOnboardingViewRef - 1);
+                                }}
                                 style={{
-                                    display: (currentOnboardingViewRef === 0 ? "none" : "block")
+                                    display: previousButtonVisibilityRef
                                 }}
                             >
                                 Previous
                             </button>
                             <button
-                                className={currentOnboardingViewRef > contentForOnboardingRef.totalSlideCount ? "none" : "block" + " text-white font-medium px-3 py-1.5 rounded-sm bg-purple-500 uppercase"} 
-                                onClick={() => setCurrentOnboardingView(currentOnboardingViewRef + 1)}
+                                className="text-white font-medium px-3 py-1.5 rounded-sm bg-purple-500 uppercase"
+                                onClick={() => {
+                                    if (currentOnboardingViewRef < contentForOnboardingRef.totalSlideCount) {
+                                        setCurrentOnboardingView(currentOnboardingViewRef + 1);
+                                    }
+                                }}
                             >
-                                Next
+                                {nextButtonContentRef}
                             </button>
                         </div>
                     </div>
@@ -99,5 +121,5 @@ function manageOnboardingContent_onSlide(currentState=0) {
             content = <p>something went wrong</p>
         break;
     }
-    return { content, totalSlideCount: 3};
+    return { content, totalSlideCount: 1};
 }
