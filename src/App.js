@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Onboarding from "./Onboarding";
 
+import 'animate.css';
+
 export default function App() {
   const [userStatusRef] = useState(true);
 
