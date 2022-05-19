@@ -11,7 +11,8 @@ export default function Onboarding() {
     // button visibilty states
     const [previousButtonVisibilityRef, setPreviousButtonVisibility] = useState("none");
     const [nextButtonContentRef, setNextButtonContent] = useState("next");
-
+    console.log(contentForOnboardingRef.totalSlideCount);
+    
     useEffect(() => {
         // fetching content to show in the modal
         setContentForOnboarding(manageOnboardingContent_onSlide(currentOnboardingViewRef));
@@ -25,8 +26,14 @@ export default function Onboarding() {
         // next button text content will be getting changed
         // once the user is on the ending slide (lastIndex slide)
         currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount ? setNextButtonContent("get started") : setNextButtonContent("next");
-
     }, [currentOnboardingViewRef]);
+
+    useEffect(() => {
+        if (contentForOnboardingRef.totalSlideCount === -1) {
+            setOnboarding(false);
+        }
+    }, []);
+
     return (
         <React.Fragment>
             <button 
@@ -109,17 +116,9 @@ export default function Onboarding() {
 }
 
 function manageOnboardingContent_onSlide(currentState=0) {
-    let content;
-    switch (currentState) {
-        case 0:
-            content = <p>slide 0</p>
-        break;
-        case 1:
-            content = <p>slide 1</p>
-        break;
-        default: 
-            content = <p>something went wrong</p>
-        break;
-    }
-    return { content, totalSlideCount: 1};
+    let onboardingContent = [
+
+    ];
+
+    return { content: onboardingContent[currentState], totalSlideCount: onboardingContent.length - 1};
 }
