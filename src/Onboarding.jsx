@@ -71,21 +71,40 @@ export default function Onboarding() {
                     <span className="new-feature-tag-slot w-fit h-fit">
                         {contentForOnboardingRef.content.newFeatureTag ? <p className="w-fit h-fit text-xs font-bold text-purple-500">NEW FEATURE</p> : <React.Fragment></React.Fragment>}
                     </span>
-                    <h1 className="leading-snug text-2xl font-medium text-white mt-2">{contentForOnboardingRef.content.featureTitle}</h1>
+                    <h1 className="leading-snug text-3xl font-medium text-white mt-2">{contentForOnboardingRef.content.featureTitle}</h1>
+                    <p className="leading-snug text-white text-opacity-50 text-sm font-normal">{contentForOnboardingRef.content.featureDescription}</p>
+                    
+                    <div 
+                        className="onboarding-feature-screenshots-wrapper 
+                            mt-3 w-full py-3 h-fit max-h-[500px]
+                            scroll-smooth overflow-x-scroll
+                            flex flex-row items-center justify-start gap-2
+                        "
+                    >
+                        {contentForOnboardingRef.content.featureScreenshots.map((screenshot, index) => {
+                            return (
+                                <img key={index} 
+                                    src={screenshot}
+                                    alt={contentForOnboardingRef.content.featureTitle + `-${index}`.toLowerCase()}
+                                    id={contentForOnboardingRef.content.featureTitle + `-${index}`.toLowerCase()}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
                 <div className="button-slots-wrapper mt-4 flex flex-row items-center justify-between">
                     <div className="left-button-slot w-fit h-fit flex flex-row items-center justify-center">
                         <button
-                            className="text-purple-500 font-medium px-3 py-1.5 rounded-sm bg-purple-700 bg-opacity-40 uppercase" 
+                            className="text-purple-500 font-medium px-3 py-1.5 rounded-sm bg-purple-700 bg-opacity-40 hover:bg-opacity-50 uppercase bg-cover" 
                             onClick={() => setOnboarding(false)}
                         >
                             Skip
                         </button>
                     </div>
                     <div className="right-button-slot-wrapper">
-                        <div className="right-button-slot w-fit h-fit flex flex-row items-center justify-center">
+                        <div className="right-button-slot w-fit h-fit flex flex-row items-center justify-center gap-4">
                             <button
-                                className="text-white font-medium px-3 py-1.5 rounded-sm bg-white bg-opacity-40 uppercase" 
+                                className="text-white font-medium px-3 py-1.5 rounded-sm bg-white bg-opacity-40 hover:bg-opacity-50 uppercase" 
                                 onClick={() => {
                                     setCurrentOnboardingView(currentOnboardingViewRef - 1);
                                 }}
@@ -96,10 +115,13 @@ export default function Onboarding() {
                                 Previous
                             </button>
                             <button
-                                className="text-white font-medium px-3 py-1.5 rounded-sm bg-purple-500 uppercase"
+                                className="text-white font-medium px-3 py-1.5 rounded-sm bg-purple-600 hover:bg-purple-700 uppercase"
                                 onClick={() => {
                                     if (currentOnboardingViewRef < contentForOnboardingRef.totalSlideCount) {
                                         setCurrentOnboardingView(currentOnboardingViewRef + 1);
+                                    }
+                                    if (nextButtonContentRef.toLowerCase() !== "next") {
+                                        setOnboarding(false);
                                     }
                                 }}
                             >
@@ -120,7 +142,43 @@ function manageOnboardingContent_onSlide(currentState=0) {
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
             featureScreenshots: [
-
+                "https://placekitten.com/300/300",
+                "https://placekitten.com/400/300",
+                "https://placekitten.com/300/200",
+                "https://placekitten.com/200/300",
+            ]
+        },
+        {
+            newFeatureTag: true,
+            featureTitle: "Visualiser",
+            featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
+            featureScreenshots: [
+                "https://placekitten.com/200/300",
+                "https://placekitten.com/300/300",
+                "https://placekitten.com/400/300",
+                "https://placekitten.com/200/300",
+            ]
+        },
+        {
+            newFeatureTag: true,
+            featureTitle: "Visualiser",
+            featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
+            featureScreenshots: [
+                "https://placekitten.com/300/300",
+                "https://placekitten.com/200/300",
+                "https://placekitten.com/300/400",
+                "https://placekitten.com/300/300",
+            ]
+        },
+        {
+            newFeatureTag: true,
+            featureTitle: "Visualiser",
+            featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
+            featureScreenshots: [
+                "https://placekitten.com/300/200",
+                "https://placekitten.com/400/300",
+                "https://placekitten.com/400/300",
+                "https://placekitten.com/300/400",
             ]
         }    
     ];

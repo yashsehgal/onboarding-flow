@@ -10,3 +10,24 @@ body {
     max-width: 1150px;
     background-color: rgb(24, 0, 44);
 }
+
+/* width */
+*::-webkit-scrollbar {
+    height: 6px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.200);
+    border-radius: 100px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+background: #888;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
