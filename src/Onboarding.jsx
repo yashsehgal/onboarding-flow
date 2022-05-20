@@ -76,20 +76,15 @@ export default function Onboarding() {
                     
                     <div 
                         className="onboarding-feature-screenshots-wrapper 
-                            mt-3 w-full py-3 h-fit max-h-[500px]
-                            scroll-smooth overflow-x-scroll
+                            mt-3 w-auto py-3 h-fit max-h-[400px] overflow-hidden
                             flex flex-row items-center justify-start gap-2
                         "
                     >
-                        {contentForOnboardingRef.content.featureScreenshots.map((screenshot, index) => {
-                            return (
-                                <img key={index} 
-                                    src={screenshot}
-                                    alt={contentForOnboardingRef.content.featureTitle + `-${index}`.toLowerCase()}
-                                    id={contentForOnboardingRef.content.featureTitle + `-${index}`.toLowerCase()}
-                                />
-                            )
-                        })}
+                        <img 
+                            src={contentForOnboardingRef.content.featureScreenshot}
+                            alt={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
+                            id={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
+                        />
                     </div>
                 </div>
                 <div className="button-slots-wrapper mt-4 flex flex-row items-center justify-between">
@@ -141,41 +136,25 @@ function manageOnboardingContent_onSlide(currentState=0) {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshots: [
-                "https://placekitten.com/300/300",
-                "https://placekitten.com/400/300",
-                "https://placekitten.com/300/200"
-            ]
+            featureScreenshot: "https://placekitten.com/300/300"
         },
         {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshots: [
-                "https://placekitten.com/200/300",
-                "https://placekitten.com/300/300",
-                "https://placekitten.com/400/300",
-                "https://placekitten.com/200/300",
-            ]
+            featureScreenshot: "https://placekitten.com/200/300"
         },
         {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshots: [
-                "https://placekitten.com/300/300",
-                "https://placekitten.com/200/300",
-                "https://placekitten.com/300/400"
-            ]
+            featureScreenshot: "https://placekitten.com/300/300"
         },
         {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshots: [
-                "https://placekitten.com/300/200",
-                "https://placekitten.com/400/300"
-            ]
+            featureScreenshot: "https://placekitten.com/300/300"
         }    
     ];
 
