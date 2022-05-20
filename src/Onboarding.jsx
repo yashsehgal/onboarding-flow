@@ -27,7 +27,7 @@ export default function Onboarding() {
         // next button text content will be getting changed
         // once the user is on the ending slide (lastIndex slide)
         currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount ? setNextButtonContent("get started 🚀") : setNextButtonContent("next");
-    }, [currentOnboardingViewRef]);
+    }, [currentOnboardingViewRef, contentForOnboardingRef.totalSlideCount]);
 
     return (
         <React.Fragment>
@@ -144,8 +144,7 @@ function manageOnboardingContent_onSlide(currentState=0) {
             featureScreenshots: [
                 "https://placekitten.com/300/300",
                 "https://placekitten.com/400/300",
-                "https://placekitten.com/300/200",
-                "https://placekitten.com/200/300",
+                "https://placekitten.com/300/200"
             ]
         },
         {
@@ -166,8 +165,7 @@ function manageOnboardingContent_onSlide(currentState=0) {
             featureScreenshots: [
                 "https://placekitten.com/300/300",
                 "https://placekitten.com/200/300",
-                "https://placekitten.com/300/400",
-                "https://placekitten.com/300/300",
+                "https://placekitten.com/300/400"
             ]
         },
         {
@@ -176,9 +174,7 @@ function manageOnboardingContent_onSlide(currentState=0) {
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
             featureScreenshots: [
                 "https://placekitten.com/300/200",
-                "https://placekitten.com/400/300",
-                "https://placekitten.com/400/300",
-                "https://placekitten.com/300/400",
+                "https://placekitten.com/400/300"
             ]
         }    
     ];
