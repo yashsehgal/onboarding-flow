@@ -84,6 +84,13 @@ export default function Onboarding() {
                             src={contentForOnboardingRef.content.featureScreenshot}
                             alt={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
                             id={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
+                            className="mx-auto"
+                        />
+                    </div>
+                    <div className="navigation-component-wrapper">
+                        <ShowSlideNavigation 
+                            totalSlideCount={contentForOnboardingRef.totalSlideCount} 
+                            activeSlideIndex={currentOnboardingViewRef+1}    
                         />
                     </div>
                 </div>
@@ -136,27 +143,69 @@ function manageOnboardingContent_onSlide(currentState=0) {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshot: "https://placekitten.com/300/300"
+            featureScreenshot: "https://placekitten.com/700/240"
         },
         {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshot: "https://placekitten.com/200/300"
+            featureScreenshot: "https://placekitten.com/700/240"
         },
         {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshot: "https://placekitten.com/300/300"
+            featureScreenshot: "https://placekitten.com/700/240"
         },
         {
             newFeatureTag: true,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
-            featureScreenshot: "https://placekitten.com/300/300"
+            featureScreenshot: "https://placekitten.com/700/240"
         }    
     ];
 
     return { content: onboardingContent[currentState], totalSlideCount: onboardingContent.length - 1};
+}
+
+// showSlideCount is a sub-component here
+// getting used to render the active-slide navigation feature
+
+function ShowSlideNavigation({activeSlideIndex=0, totalSlideCount}) {
+    let dotsContainer = [];
+    useEffect(() => {
+        for (let dotCount = 0; dotCount <= totalSlideCount; dotCount++) {
+            dotsContainer.push(
+                dotCount === activeSlideIndex
+                    ? <React.Fragment>
+                        <div className="p-1 w-1 h-1 rounded-full bg-white" />
+                      </React.Fragment>
+                    : <React.Fragment>
+                        <div className="p-1 w-1 h-1 rounded-full bg-white bg-opacity-30" />
+                      </React.Fragment>
+            )
+        }
+    });
+    
+    if (!totalSlideCount) return <React.Fragment></React.Fragment>;
+
+    if (!activeSlideIndex) {
+        return (
+            <React.Fragment>
+                <div className="navigation-dots-component-wrapper w-fit h-fit flex flex-row items-center justify-between mx-auto gap-2 mt-2">
+                    {dotsContainer.map((dot, dotIndex) => {
+                        return (
+                            <React.Fragment key={dotIndex}>{dot}</React.Fragment>
+                        )
+                    })}
+                </div>
+            </React.Fragment>
+        )
+    } else {
+        return (
+            <React.Fragment>
+
+            </React.Fragment>
+        )
+    }
 }
