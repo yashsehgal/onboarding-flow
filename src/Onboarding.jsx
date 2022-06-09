@@ -27,11 +27,11 @@ export default function Onboarding() {
             currentOnboardingViewRef ? `${contentForOnboardingRef.totalSlideCount*(currentOnboardingViewRef/100)*1000}%` : `0%`
         )
 
+        // setting width of progress bar to 100% when slide-count 
+        // is the last index
         if (currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount) {
             setOnboardingProgressBarWidth('100%');
         }
-
-        console.log(onboardingProgressBarWidthRef);
 
         // managing visibility states for buttons
         
