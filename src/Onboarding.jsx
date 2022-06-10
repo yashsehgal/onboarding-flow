@@ -14,17 +14,20 @@ export default function Onboarding() {
     // button visibilty states
     const [previousButtonVisibilityRef, setPreviousButtonVisibility] = useState("none");
     const [nextButtonContentRef, setNextButtonContent] = useState("next");
-    console.log(contentForOnboardingRef.totalSlideCount);
     
     useEffect(() => {
         // fetching content to show in the modal
-        setContentForOnboarding(manageOnboardingContent_onSlide(currentOnboardingViewRef));
+        setContentForOnboarding(
+            manageOnboardingContent_onSlide(currentOnboardingViewRef)
+        );
         
         // changing the width of the progress bar according to the 
         // slide count (by defining a percentage value with the 
         // help of contentForOnboardingRef.totalSlideCount)
         setOnboardingProgressBarWidth(
-            currentOnboardingViewRef ? `${contentForOnboardingRef.totalSlideCount*(currentOnboardingViewRef/100)*1000}%` : `0%`
+            currentOnboardingViewRef 
+                ? `${contentForOnboardingRef.totalSlideCount*(currentOnboardingViewRef/100)*1000}%` 
+                : `0%`
         )
 
         // setting width of progress bar to 100% when slide-count 
@@ -37,11 +40,15 @@ export default function Onboarding() {
         
         // previous button will be set as none(in terms of display) 
         // when currentOnboardingViewRef === 0 (initial screen view)
-        currentOnboardingViewRef !== 0 ? setPreviousButtonVisibility("block") : setPreviousButtonVisibility("none");
+        currentOnboardingViewRef !== 0 
+            ? setPreviousButtonVisibility("block") 
+            : setPreviousButtonVisibility("none");
         
         // next button text content will be getting changed
         // once the user is on the ending slide (lastIndex slide)
-        currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount ? setNextButtonContent("get started 🚀") : setNextButtonContent("next");
+        currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount 
+            ? setNextButtonContent("get started 🚀") 
+            : setNextButtonContent("next");
     }, [currentOnboardingViewRef, contentForOnboardingRef.totalSlideCount, onboardingProgressBarWidthRef]);
 
     return (
