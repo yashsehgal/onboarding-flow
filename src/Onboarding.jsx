@@ -104,7 +104,9 @@ export default function Onboarding() {
                         }}
                     >
                         <span className="new-feature-tag-slot w-fit h-fit">
-                            {contentForOnboardingRef.content.newFeatureTag ? <p className="w-fit h-fit text-xs font-bold text-purple-500">NEW FEATURE</p> : <React.Fragment></React.Fragment>}
+                            {contentForOnboardingRef.content.newFeatureTag 
+                                ? <p className="w-fit h-fit text-xs font-bold text-purple-500">NEW FEATURE {"✨"}</p> 
+                                : <React.Fragment></React.Fragment>}
                         </span>
                         <h1 className="leading-snug text-3xl font-medium text-white mt-2">{contentForOnboardingRef.content.featureTitle}</h1>
                         <p className="leading-snug text-white text-opacity-50 text-sm font-normal">{contentForOnboardingRef.content.featureDescription}</p>
@@ -195,13 +197,13 @@ function manageOnboardingContent_onSlide(currentState=0) {
             featureScreenshot: "https://placekitten.com/700/240"
         },
         {
-            newFeatureTag: true,
+            newFeatureTag: false,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
             featureScreenshot: "https://placekitten.com/700/240"
         },
         {
-            newFeatureTag: true,
+            newFeatureTag: false,
             featureTitle: "Visualiser",
             featureDescription: "Visualiser for your managing EDA Driven APIs, visually",
             featureScreenshot: "https://placekitten.com/700/240"
