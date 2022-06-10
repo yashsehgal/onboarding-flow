@@ -1,5 +1,6 @@
 # onboarding flow for asyncapi/studio
 
+- Based on issue https://github.com/asyncapi/studio/issues/284
 - Creating main logics for implementing frontend for the onboarding flow to asyncapi-studio
 - checkout the current component deployment at: https://onboarding-flow.vercel.app/
 - checkout AsyncAPI Studio at: https://studio.asyncapi.com/
