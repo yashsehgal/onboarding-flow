@@ -86,8 +86,8 @@ export default function Onboarding() {
                 }}
             >
                 {/* start: progress bar animation section wrapper */}
-                <div className="progress-bar-animation-section-wrapper h-fit w-full bg-white">
-                    <div className="p-1 bg-purple-500" 
+                <div className="progress-bar-animation-section-wrapper h-fit w-full bg-white transition-all">
+                    <div className="p-1 bg-purple-500 transition-all" 
                         style={{
                             width: onboardingProgressBarWidthRef
                         }}
