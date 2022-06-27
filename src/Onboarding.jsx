@@ -133,7 +133,8 @@ export default function Onboarding() {
                             
                                 <ShowSlideNavigation 
                                     totalSlideCount={contentForOnboardingRef.totalSlideCount} 
-                                    activeSlideIndex={currentOnboardingViewRef+1}    
+                                    activeSlideIndex={currentOnboardingViewRef+1}
+                                    updateActiveSlideIndexMethod={setCurrentOnboardingView}   
                                 /> 
                            
                         </div>
@@ -214,7 +215,7 @@ function manageOnboardingContent_onSlide(currentState=0) {
 }
 
 // ShowSlideNavigation - method to render dot-sliding component
-function ShowSlideNavigation({totalSlideCount, activeSlideIndex}) {
+function ShowSlideNavigation({totalSlideCount, activeSlideIndex, updateActiveSlideIndexMethod}) {
     const [activeDotIndexRef, setActiveDotIndex] = useState(activeSlideIndex);
     let dotSliderRef = [];
     useEffect(() => {
@@ -222,11 +223,12 @@ function ShowSlideNavigation({totalSlideCount, activeSlideIndex}) {
     }, [activeSlideIndex]);
     // rendering html-DOM elements as dots inside the dotSlideRef array
     for (let dotCount = 0; dotCount <= totalSlideCount; dotCount++) {
-        dotSliderRef.push(
-            <React.Fragment>
-                <div className="w-1 h-1 p-[4px] rounded-full bg-white" />
-            </React.Fragment>
-        )
+        dotSliderRef.push({
+            slideLocation: dotCount,
+            dotContent: <React.Fragment>
+                            <div className="w-1 h-1 p-[4px] rounded-full bg-white" key={dotCount} />
+                        </React.Fragment>
+        });
     }
     return (
         <React.Fragment>
@@ -235,16 +237,20 @@ function ShowSlideNavigation({totalSlideCount, activeSlideIndex}) {
                     if (dotIndex === activeDotIndexRef-1) {
                         return (
                             <React.Fragment key={dotIndex}>
-                                <span className="flex flex-row align-center justify-center w-fit h-fit">
-                                    {dot}
+                                <span className="flex flex-row align-center justify-center w-fit h-fit opacity-80"
+                                    onClick={() => updateActiveSlideIndexMethod(dot.slideLocation)}
+                                >
+                                    {dot.dotContent}
                                 </span>
                             </React.Fragment>
                         )
                     } else {
                         return (
                             <React.Fragment key={dotIndex}>
-                                <span className="flex flex-row align-center justify-center w-fit h-fit opacity-40">
-                                    {dot}
+                                <span className="flex flex-row align-center justify-center w-fit h-fit opacity-40 hover:opacity-60"
+                                    onClick={() => updateActiveSlideIndexMethod(dot.slideLocation)}
+                                >
+                                    {dot.dotContent}
                                 </span>
                             </React.Fragment>
                         )
