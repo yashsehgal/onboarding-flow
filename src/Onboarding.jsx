@@ -86,13 +86,13 @@ export default function Onboarding() {
                 }}
             >
                 {/* start: progress bar animation section wrapper */}
-                <div className="progress-bar-animation-section-wrapper h-fit w-full bg-white transition-all">
+                {/* <div className="progress-bar-animation-section-wrapper h-fit w-full bg-white transition-all">
                     <div className="p-1 bg-purple-500 transition-all" 
                         style={{
                             width: onboardingProgressBarWidthRef
                         }}
                     />
-                </div>
+                </div> */}
                 {/* end: progress bar animation section wrapper */}
 
                 <div className="onboarding-popup-internal-content-wrapper p-6">
@@ -130,12 +130,12 @@ export default function Onboarding() {
                                 currently, it's not working but saving it for future references
                             */}
 
-                            {/* 
+                            
                                 <ShowSlideNavigation 
                                     totalSlideCount={contentForOnboardingRef.totalSlideCount} 
                                     activeSlideIndex={currentOnboardingViewRef+1}    
                                 /> 
-                            */}
+                           
                         </div>
                     </div>
                     <div className="button-slots-wrapper mt-4 flex flex-row items-center justify-between">
@@ -211,4 +211,46 @@ function manageOnboardingContent_onSlide(currentState=0) {
     ];
 
     return { content: onboardingContent[currentState], totalSlideCount: onboardingContent.length - 1};
+}
+
+// ShowSlideNavigation - method to render dot-sliding component
+function ShowSlideNavigation({totalSlideCount, activeSlideIndex}) {
+    const [activeDotIndexRef, setActiveDotIndex] = useState(activeSlideIndex);
+    let dotSliderRef = [];
+    useEffect(() => {
+        setActiveDotIndex(activeSlideIndex);
+    }, [activeSlideIndex]);
+    // rendering html-DOM elements as dots inside the dotSlideRef array
+    for (let dotCount = 0; dotCount <= totalSlideCount; dotCount++) {
+        dotSliderRef.push(
+            <React.Fragment>
+                <div className="w-1 h-1 p-[4px] rounded-full bg-white" />
+            </React.Fragment>
+        )
+    }
+    return (
+        <React.Fragment>
+            <div className="flex flex-row items-center justify-center w-fit h-fit gap-3 mx-auto">
+                {dotSliderRef.map((dot, dotIndex) => {
+                    if (dotIndex === activeDotIndexRef-1) {
+                        return (
+                            <React.Fragment key={dotIndex}>
+                                <span className="flex flex-row align-center justify-center w-fit h-fit">
+                                    {dot}
+                                </span>
+                            </React.Fragment>
+                        )
+                    } else {
+                        return (
+                            <React.Fragment key={dotIndex}>
+                                <span className="flex flex-row align-center justify-center w-fit h-fit opacity-40">
+                                    {dot}
+                                </span>
+                            </React.Fragment>
+                        )
+                    }
+                })}
+            </div>
+        </React.Fragment>
+    )
 }
