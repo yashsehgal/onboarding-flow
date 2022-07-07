@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 ReactModal.setAppElement('#root');
 
@@ -95,11 +96,11 @@ export default function Onboarding() {
                 </div> */}
                 {/* end: progress bar animation section wrapper */}
 
-                <div className="onboarding-popup-internal-content-wrapper p-6">
+                <div className="onboarding-popup-internal-content-wrapper cursor-default select-none p-6">
                     <div 
                         className="text-white text-lg font-medium" 
                         style={{
-                            width: '720px',
+                            width: 'fit-content',
                             height: 'fit-content'
                         }}
                     >
@@ -114,7 +115,8 @@ export default function Onboarding() {
                         <div 
                             className="onboarding-feature-screenshots-wrapper 
                                 mt-3 w-auto py-3 h-fit max-h-[400px] overflow-hidden
-                                flex flex-row items-center justify-start gap-2
+                                flex flex-row items-center justify-start gap-3 relative
+                                cursor-default select-none
                             "
                         >
                             <img 
@@ -123,20 +125,52 @@ export default function Onboarding() {
                                 id={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
                                 className="mx-auto"
                             />
+                            <div 
+                                className="slider-action-button-layer-wrapper p-3 flex flex-row items-center justify-between mx-auto w-full h-fit absolute"
+                                style={{
+                                    right: '0px',
+                                }}
+                            >
+                                {!currentOnboardingViewRef && currentOnboardingViewRef === 0
+                                    ? <span className="opacity-0 cursor-default">left-button-placeholder</span>
+                                    : <button
+                                        id="slider-slide_left" 
+                                        className="slider_slide-action-button p-2 rounded-full bg-zinc-600 shadow-lg hover:shadow-2xl"
+                                        onClick={() => {
+                                            if (currentOnboardingViewRef && currentOnboardingViewRef !== 0) {
+                                                setCurrentOnboardingView(currentOnboardingViewRef - 1);
+                                            }
+                                        }}
+                                    >
+                                        <FaArrowLeft className="text-white text-opacity-60" />
+                                    </button>
+                                }
+                                {currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount
+                                    ? <React.Fragment></React.Fragment>
+                                    : <button
+                                        id="slider-slide_right" 
+                                        className="slider_slide-action-button p-2 rounded-full bg-zinc-600 shadow-lg hover:shadow-2xl"
+                                        onClick={() => {
+                                            if (currentOnboardingViewRef < contentForOnboardingRef.totalSlideCount) {
+                                                setCurrentOnboardingView(currentOnboardingViewRef + 1);
+                                            }
+                                        }}
+                                    >
+                                        <FaArrowRight className="text-white text-opacity-60" />
+                                    </button>
+                                }
+                            </div>
                         </div>
                         <div className="navigation-component-wrapper">
                             {/* 
                                 Legacy implementation for showing navigation slider,
                                 currently, it's not working but saving it for future references
                             */}
-
-                            
                                 <ShowSlideNavigation 
                                     totalSlideCount={contentForOnboardingRef.totalSlideCount} 
                                     activeSlideIndex={currentOnboardingViewRef+1}
                                     updateActiveSlideIndexMethod={setCurrentOnboardingView}   
                                 /> 
-                           
                         </div>
                     </div>
                     <div className="button-slots-wrapper mt-4 flex flex-row items-center justify-between">
