@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 ReactModal.setAppElement('#root');
 
@@ -14,6 +15,10 @@ export default function Onboarding() {
     // button visibilty states
     const [previousButtonVisibilityRef, setPreviousButtonVisibility] = useState("none");
     const [nextButtonContentRef, setNextButtonContent] = useState("next");
+
+    // states to operate left/right slider action buttons
+    const [leftSlideActionRef, setLeftSlideAction] = useState(false);
+    const [rightSlideActionRef, setRightSlideAction] = useState(true);
     
     useEffect(() => {
         // fetching content to show in the modal
@@ -99,7 +104,7 @@ export default function Onboarding() {
                     <div 
                         className="text-white text-lg font-medium" 
                         style={{
-                            width: '720px',
+                            width: 'fit-content',
                             height: 'fit-content'
                         }}
                     >
@@ -114,29 +119,54 @@ export default function Onboarding() {
                         <div 
                             className="onboarding-feature-screenshots-wrapper 
                                 mt-3 w-auto py-3 h-fit max-h-[400px] overflow-hidden
-                                flex flex-row items-center justify-start gap-2
+                                flex flex-row items-center justify-start gap-3
                             "
                         >
+                            {!currentOnboardingViewRef && currentOnboardingViewRef === 0
+                                ? <React.Fragment></React.Fragment>
+                                : <button
+                                    id="slider-slide_left" 
+                                    className="p-2 rounded-full bg-zinc-600 opacity-50 shadow-lg hover:opacity-60 hover:shadow-2xl"
+                                    onClick={() => {
+                                        if (currentOnboardingViewRef && currentOnboardingViewRef !== 0) {
+                                            setCurrentOnboardingView(currentOnboardingViewRef - 1);
+                                        }
+                                    }}
+                                >
+                                    <FaArrowLeft className="text-white text-opacity-60" />
+                                </button>
+                            }
                             <img 
                                 src={contentForOnboardingRef.content.featureScreenshot}
                                 alt={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
                                 id={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
                                 className="mx-auto"
                             />
+                            {currentOnboardingViewRef === contentForOnboardingRef.totalSlideCount
+                                ? <React.Fragment></React.Fragment>
+                                : <button
+                                    id="slider-slide_right" 
+                                    className="p-2 rounded-full bg-zinc-600 opacity-50 shadow-lg hover:opacity-60 hover:shadow-2xl"
+                                    onClick={() => {
+                                        if (currentOnboardingViewRef < contentForOnboardingRef.totalSlideCount) {
+                                            setCurrentOnboardingView(currentOnboardingViewRef + 1);
+                                        }
+                                    }}
+                                >
+                                    <FaArrowRight className="text-white text-opacity-60" />
+                                </button>
+                            } 
                         </div>
                         <div className="navigation-component-wrapper">
                             {/* 
                                 Legacy implementation for showing navigation slider,
                                 currently, it's not working but saving it for future references
                             */}
-
-                            
                                 <ShowSlideNavigation 
                                     totalSlideCount={contentForOnboardingRef.totalSlideCount} 
                                     activeSlideIndex={currentOnboardingViewRef+1}
                                     updateActiveSlideIndexMethod={setCurrentOnboardingView}   
                                 /> 
-                           
                         </div>
                     </div>
                     <div className="button-slots-wrapper mt-4 flex flex-row items-center justify-between">
