@@ -32,3 +32,18 @@ body {
 *::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+/* css dump for slider_slide-action-button */
+
+.onboarding-feature-screenshots-wrapper 
+    > .slider-action-button-layer-wrapper 
+        > .slider_slide-action-button {
+            opacity: 10%;
+}
+
+.onboarding-feature-screenshots-wrapper:hover 
+    > .slider-action-button-layer-wrapper 
+        > .slider_slide-action-button {
+            opacity: 50%;
+}
