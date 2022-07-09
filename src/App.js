@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <div className="app-wrapper mt-8">
+      <div className="app-wrapper m-24">
         { userStatusRef ? <Onboarding /> : <p>existing user</p> }
       </div>
     </React.Fragment>
