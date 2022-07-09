@@ -48,3 +48,25 @@ body {
         > .slider_slide-action-button {
             opacity: 50%;
 }
+
+img.feature-demo-banner-image {
+    width: auto;
+}
+
+@media screen and (max-width: 900px) {
+    img.feature-demo-banner-image {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    img.feature-demo-banner-image {
+        width: 420px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    img.feature-demo-banner-img {
+        width: 360px;
+    }
+}

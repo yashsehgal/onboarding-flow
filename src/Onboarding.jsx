@@ -123,7 +123,7 @@ export default function Onboarding() {
                                 src={contentForOnboardingRef.content.featureScreenshot}
                                 alt={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
                                 id={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
-                                className="mx-auto"
+                                className="feature-demo-banner-image mx-auto"
                             />
                             <div 
                                 className="slider-action-button-layer-wrapper p-3 flex flex-row items-center justify-between mx-auto w-full h-fit absolute"
