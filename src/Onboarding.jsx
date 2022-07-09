@@ -63,6 +63,7 @@ export default function Onboarding() {
             <ReactModal 
                 isOpen={onboardingRef && contentForOnboardingRef.totalSlideCount !== -1 ? true : false} 
                 onRequestClose={() => setOnboarding(false)}
+                className="onboarding-flow-popup_content"
                 style={{
                     overlay: {
                         display: 'flex',

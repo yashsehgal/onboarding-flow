@@ -67,6 +67,6 @@ img.feature-demo-banner-image {
 
 @media screen and (max-width: 500px) {
     img.feature-demo-banner-img {
-        width: 360px;
+        width: 320px;
     }
 }
