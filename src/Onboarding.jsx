@@ -4,7 +4,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 ReactModal.setAppElement('#root');
 
-export default function Onboarding() {
+export default function Onboarding({ handleNewUserMethod }) {
 
     const [onboardingRef, setOnboarding] = useState(false);
     const [currentOnboardingViewRef, setCurrentOnboardingView] = useState(0);
@@ -63,6 +63,7 @@ export default function Onboarding() {
             <ReactModal 
                 isOpen={onboardingRef && contentForOnboardingRef.totalSlideCount !== -1 ? true : false} 
                 onRequestClose={() => setOnboarding(false)}
+                className="onboarding-flow-popup_content"
                 style={{
                     overlay: {
                         display: 'flex',
@@ -123,7 +124,7 @@ export default function Onboarding() {
                                 src={contentForOnboardingRef.content.featureScreenshot}
                                 alt={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
                                 id={contentForOnboardingRef.content.featureTitle.toString().toLowerCase()}
-                                className="mx-auto"
+                                className="feature-demo-banner-image mx-auto"
                             />
                             <div 
                                 className="slider-action-button-layer-wrapper p-3 flex flex-row items-center justify-between mx-auto w-full h-fit absolute"
@@ -203,6 +204,10 @@ export default function Onboarding() {
                                         }
                                         if (nextButtonContentRef.toLowerCase() !== "next") {
                                             setOnboarding(false);
+                                            // setting-up the current user for new-user state 
+                                            // to existing-user state
+                                            localStorage.setItem('is-user-new', 'existing-user');
+                                            handleNewUserMethod(false);
                                         }
                                     }}
                                 >
