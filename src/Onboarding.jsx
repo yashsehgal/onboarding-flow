@@ -4,7 +4,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 ReactModal.setAppElement('#root');
 
-export default function Onboarding() {
+export default function Onboarding({ handleNewUserMethod }) {
 
     const [onboardingRef, setOnboarding] = useState(false);
     const [currentOnboardingViewRef, setCurrentOnboardingView] = useState(0);
@@ -204,6 +204,10 @@ export default function Onboarding() {
                                         }
                                         if (nextButtonContentRef.toLowerCase() !== "next") {
                                             setOnboarding(false);
+                                            // setting-up the current user for new-user state 
+                                            // to existing-user state
+                                            localStorage.setItem('is-user-new', 'existing-user');
+                                            handleNewUserMethod(false);
                                         }
                                     }}
                                 >
